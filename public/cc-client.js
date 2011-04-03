@@ -7,7 +7,7 @@
 
 /* SOCKET.IO SETUP ************************************/
 
-var socket = new io.Socket('localhost', {'port' : 8000});
+var socket = new io.Socket(HOSTNAME, {'port' : 8000});
 socket.on('message', function(message) { dispatcher.dispatch(message); });
 
 

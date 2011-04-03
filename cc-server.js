@@ -25,7 +25,7 @@ app.configure(function() {
     app.use(express.static(__dirname + "/public"));
     app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
-app.listen(8000);
+app.listen(8000, cc.HOSTNAME);
 
 /* SOCKET.IO SERVER ***********************************/
 
@@ -46,7 +46,7 @@ dispatcher.register('clear', paint);
 
 /* EVENT DELEGATES ************************************/
 
-// when a client disconnects, remove them from their current map tile
+// when a client disconnects, remove them from their current map cell
 function unregisterClient(c) {
     var clientKey = makeClientKey(c);
     return redis.get(clientKey, function(err, cellKey) {
@@ -55,7 +55,7 @@ function unregisterClient(c) {
     });
 }
 
-// move a client to the correct map tile
+// move a client to the correct map cell
 function moveClient(m, c) {
 
     var clientKey = makeClientKey(c);
