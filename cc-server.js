@@ -63,8 +63,12 @@ function moveClient(m, c) {
     // get the client's old cell
     return redis.get(clientKey, function(err, cellKey) {
 
+        // guard against injection
+        cLat = parseFloat(m.data.cLat);
+        cLng = parseFloat(m.data.cLng);
+
         // get the client's new cell
-        var newCellKey = makeCellKey(m.data.cLat, m.data.cLng);
+        var newCellKey = makeCellKey(cLat, cLng);
 
         // check if the client is trying to move to a valid cell
         return redis.exists(newCellKey, function(err, key) {
@@ -100,8 +104,12 @@ function moveClient(m, c) {
 
 function paint(m, c) {
 
+    // protect against injection
+    x = parseInt(m.data.x);
+    y = parseInt(m.data.y);
+
     // get the (1D) index being drawn to
-    var index = cc.toIndex(m.data.x, m.data.y);
+    var index = cc.toIndex(x, y);
 
     // if it's invalid, give up
     if(index < 0 || index >= cc.CELL_ROWS * cc.CELL_COLS) {
