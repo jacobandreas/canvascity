@@ -52,7 +52,7 @@ this.MAP_WEST = -74.03;
 this.MAP_NORTH = 40.88;
 this.MAP_EAST = -73.91;
 
-this.HOSTNAME = 'canvascity.jacobandreas.net';
+this.HOSTNAME = 'localhost';
 
 
 /* HELPERS ********************************************/

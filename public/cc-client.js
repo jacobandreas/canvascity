@@ -51,14 +51,20 @@ $(document).ready(function() {
     g = $('canvas')[0].getContext('2d');
 
     // listen for click & drag events
-    $('canvas').mousedown(trackDrawing);
+    //$('canvas').mousedown(trackDrawing);
+    //
+    var touch = $('canvas').Touchable();
+    touch.bind('touchablemove', function(err, evt) {
+        d = { 'pageX' : evt.currentTouch.x, 'pageY' : evt.currentTouch.y };
+        sendCoords(d);
+    });
+
+    // listen for button presses
     $('#drawbutton').click(function() { 
         drawMode = true; 
         $('#drawbutton').addClass('pressed');
         $('#clearbutton').removeClass('pressed');
     });
-
-    // listen for button presses
     $('#clearbutton').click(function() { 
         drawMode = false; 
         $('#drawbutton').removeClass('pressed');
@@ -133,7 +139,7 @@ function sendCoords(evt) {
 
     // get canvas-relative coordinates
     var px = evt.pageX - cX - 0;
-    var py = evt.pageY - cY - 5;
+    var py = evt.pageY - cY - 10;
     
     // get cell-grid-relative coordinates
     var x = Math.floor(px / CELL_WIDTH);
