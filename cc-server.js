@@ -69,8 +69,9 @@ function moveClient(m, c) {
         // check if the client is trying to move to a valid cell
         return redis.exists(newCellKey, function(err, key) {
 
-            // if it isn't, give up
+            // if it isn't, send an error message and give up
             if(!key) {
+                c.send({'type' : 'invalid-cell'})
                 return;
             }
 

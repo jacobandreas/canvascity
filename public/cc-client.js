@@ -18,6 +18,7 @@ var dispatcher = createDispatcher();
 dispatcher.register('draw', function(m) { draw(m.data); });
 dispatcher.register('clear', function(m) { clear(m.data); });
 dispatcher.register('load', function(m) { load(m.data); });
+dispatcher.register('invalid-cell', showInvalidCell);
 
 
 /* GENERAL ENVIRONMENT CONFIG *************************/
@@ -41,7 +42,7 @@ $(document).ready(function() {
     socket.connect();
 
     // listen for position changes
-    navigator.geolocation.watchPosition(positionChanged);
+    navigator.geolocation.watchPosition(positionChanged, positionError);
 
     // get canvas offset
     cX = $('#wrapper').offset().left;
@@ -121,6 +122,10 @@ function positionChanged(pos) {
 
 }
 
+function positionError(pos) {
+    alert("Sorry, you need a device that supports geolocation to use CanvasCity.");
+}
+
 
 /* JQUERY EVENT DELEGATES *****************************/
 
@@ -169,7 +174,7 @@ function sendCoords(evt) {
 
     // draw the pixel locally
     if(drawMode) {
-        message.data.color = 'rgba(0,0,100,' + (0.7 + 0.3 * Math.random()) + ')';
+        message.data.color = 'rgba(0,0,50,' + (0.7 + 0.3 * Math.random()) + ')';
         draw(message.data);
     } else {
         clear(message.data);
@@ -206,4 +211,8 @@ function load(data) {
             clear({'x' : i % CELL_COLS, 'y' : Math.floor(i / CELL_ROWS)});
         }
     }
+}
+
+function showInvalidCell() {
+    alert("Sorry, you must be in Manhattan to use CanvasCity. Your drawing will not be saved.");
 }
