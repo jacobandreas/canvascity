@@ -85,7 +85,7 @@ function moveClient(m, c) {
 
                 // associate the client with its new cell
                 redis.set(clientKey, newCellKey);
-                redis.sadd(makeCellClientsKey(cellKey), c.sessionId);
+                redis.sadd(makeCellClientsKey(newCellKey), c.sessionId);
 
                 // send the contents of this cell to the client
                 return redis.lrange(newCellKey, 0, -1, function(err, data) {

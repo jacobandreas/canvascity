@@ -32,5 +32,6 @@ cells.forEach(function(cell) {
         }
     }
 });
-multi.exec();
-process.exit();
+multi.exec(function() {
+    process.exit();
+});
