@@ -32,7 +32,7 @@
 
             #wrapper {
                 width: 480px;
-                margin: 10px auto;
+                margin: 0 auto;
             }
 
             canvas {
@@ -92,27 +92,17 @@
                 color: #fff;
             }
 
-	    #ad {
-                margin: 10px auto;
-                width: 468px;
+            #overlay {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 534px;
+                background: rgba(255, 0, 0, 0.2);
             }
         </style>
     </head>
     <body>
-
-	    <div id="ad">
-            <script type="text/javascript"><!--
-                google_ad_client = "ca-pub-9915880904167357";
-                /* Text Links */
-                google_ad_slot = "8027651155";
-                google_ad_width = 468;
-                google_ad_height = 15;
-                //-->
-            </script>
-            <script type="text/javascript"
-                src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-            </script>
-            </div>
 
         <div id="wrapper">
             <img id="map" src="#" />
@@ -129,6 +119,7 @@
                 &nbsp; <a href="/what.html">What?</a>
             </footer>
         </div>
+
         <script type="text/javascript">
 
           var _gaq = _gaq || [];

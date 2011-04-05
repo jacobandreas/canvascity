@@ -52,13 +52,14 @@ $(document).ready(function() {
     g = $('canvas')[0].getContext('2d');
 
     // listen for click & drag events
-    //$('canvas').mousedown(trackDrawing);
-    //
-    var touch = $('canvas').Touchable();
-    touch.bind('touchablemove', function(err, evt) {
+    var delegate = function(err, evt) {
         d = { 'pageX' : evt.currentTouch.x, 'pageY' : evt.currentTouch.y };
         sendCoords(d);
-    });
+    };
+    var touch = $('canvas').Touchable();
+    touch.bind('touchablemove', delegate);
+    touch.bind('touchablestart', delegate);
+    $('canvas').bind('mousedown', sendCoords);
 
     // listen for button presses
     $('#drawbutton').click(function() { 
@@ -174,7 +175,7 @@ function sendCoords(evt) {
 
     // draw the pixel locally
     if(drawMode) {
-        message.data.color = 'rgba(0,0,50,' + (0.7 + 0.3 * Math.random()) + ')';
+        message.data.color = 'rgba(0,0,0,' + (0.7 + 0.3 * Math.random()) + ')';
         draw(message.data);
     } else {
         clear(message.data);
