@@ -215,5 +215,11 @@ function load(data) {
 }
 
 function showInvalidCell() {
-    alert("Sorry, you must be in Manhattan to use CanvasCity. Your drawing will not be saved.");
+
+    //alert("Sorry, you must be in Manhattan to use CanvasCity. Your drawing will not be saved.");
+    
+    // default location to central park
+    
+    positionChanged({'coords':{'latitude':40.78139 ,'longitude':-73.966565}});
+
 }
